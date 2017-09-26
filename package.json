@@ -1,0 +1,16 @@
+{
+  "name": "bordefederalapi",
+  "version": "1.0.0",
+  "description": "Api para borde federal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://michelle_azagtoth@bitbucket.org/michelle_azagtoth/bordefederalapi.git"
+  },
+  "author": "Azagtoth",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/michelle_azagtoth/bordefederalapi#readme"
+}
