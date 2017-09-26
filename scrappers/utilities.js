@@ -33,28 +33,31 @@ module.exports ={
 				dipnames[dip.legislator_name_sil]=dip.id;
 
 			}
-
 			if (chamber=="diputado") {c.queue('http://3de3.mx/api/apiv1/2015/candidatos/ganadores?cargo=Diputado%20Federal');} //llamada API página
 			if (chamber=="senador") {c.queue('http://3de3.mx/api/apiv1/2015/candidatos/ganadores?cargo=Senador');} //llamada API página
 
 		});
 		count=0;
 		var c = new Crawler({
-		    maxConnections : 2,
+		    maxConnections : 1000,
 		    forceUTF8:true,
 		    callback : function (error, result, $) {
+
 		    	res_s = JSON.parse(result.body);
+          // console.log(res_s);
 		    	sitienen=res_s.candidatos;
 
 		    	async.forEachSeries(sitienen, function(legis, callback) {
+              console.log(legis);
 
 		    		l_3de3=0;
             l_twitter="";
 		    		l_genero="";
 		    		if (legis.patrimonial) {l_3de3=1;}
-            if (legis.legislator_twitter_senate) { l_twitter=legis.legislator_twitter_senate; count+=1; }
-		    		if (legis.legislator_gender_senate) {
-                l_genero=legis.legislator_gender_senate;
+            if (legis.twitter) { l_twitter=legis.twitter; count+=1; }
+		    		if (legis.genero || legis.gnero) {
+                l_genero=legis.genero;
+                l_genero=legis.gnero;
                 switch (l_genero) {
                   case 'F':
                     l_genero = "Femenino";
@@ -64,15 +67,16 @@ module.exports ={
                     break;
                   default:
                 }
-                //console.log(l_genero);
+
+                console.log(l_genero);
                }
 
-		    		name_legis=legis.legislator_name_sil+" "+legis.legislator_last_name_sil
-
+		    		name_legis=legis.nombres+legis.apellido_paterno+legis.apellido_materno;
+            // console.log(name_legis);
 
 		    		match=levPicker0(name_legis,dipnames);
 
-		    		// console.log(name_legis,"-->",match);
+		    		//console.log(name_legis,"-->",match);
             // process.exit()
 		    		app.models[ "legislators" ].update({legislator_name_sil:match[0]},{
 		    			legislator_tresdetres_senate:l_3de3,

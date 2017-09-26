@@ -58,7 +58,7 @@ var control= require ('./control/index.js');
 var csvv= require ('./csv/import_csv.js');
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://104.239.249.32");
+  res.header("Access-Control-Allow-Origin", "http://localhost");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
   next();
@@ -343,7 +343,7 @@ app.listen('8000');
 // console.log("*****                                                        *****");
 // console.log("***** @DEVELOP MICHELLE GARDUÑO (AZAGTOTH)                   *****");
 // console.log("***** @ORIGINAL IDEA BORDE POLITICO   S.A. DE C.V.           *****");
-// console.log("***** @ROUTE http://104.239.249.32:8000/METHOD                    *****");
+// console.log("***** @ROUTE http://localhost:8000/METHOD                    *****");
 // console.log("***** @VERSION 1.0                                           *****");
 // console.log("******************************************************************");
 // console.log("******************************************************************");

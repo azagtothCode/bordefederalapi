@@ -152,7 +152,8 @@ module.exports = {
 
 			    	dip["legislator_image_sil"]=$('img[alt="Foto del Legislador"]').attr("src");
 			    	dip["legislator_link_sil"]=uri;
-  					dip["legislator_order_sil"]="Federal";
+            dip["legislator_order_sil"]="Federal";
+  					dip["legislator_score_sil"]=0;
   					//dip["legislator_sil_id"]=id;
 
                   app.models[ "legislators" ].update({id_legislator_sil:id},dip).exec(function afterwards(err, updated){//{trayectoria:dip.trayectoria , silid:dip.uriid}).exec(function afterwards(err, updated){
