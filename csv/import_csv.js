@@ -1,7 +1,7 @@
 var fs = require('fs');
 var csv = require('fast-csv');
-// var stream = fs.createReadStream("/Users/Admin/documents/back_end/MEAN/bordefederalapi/csv/sample.csv");
- var stream = fs.createReadStream("/Users/imac2/documents/develop/mean/backend/node/bordefederalapi/csv/sample.csv");
+  // var stream = fs.createReadStream("/Users/Admin/documents/back_end/MEAN/bordefederalapi/csv/sample.csv");
+ var stream = fs.createReadStream("csv/sample.csv");
 
 module.exports = {
 
