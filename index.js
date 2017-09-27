@@ -24,6 +24,7 @@ var import_json_pt = require ('./import_json/import_json_pt.js');
 var import_json_pvem = require ('./import_json/import_json_pvem.js');
 var import_json_sg = require ('./import_json/import_json_sg.js');
 var import_json_social = require ('./import_json/import_json_social.js');
+var import_score = require ('./import_json/import_score.js');
 var import_facebook = require ('./import_json/import_facebook.js');
 
 //Mandamos a llamar toda la info. del SIL y asignamos todas las propiedades a dicha variable
