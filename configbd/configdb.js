@@ -31,7 +31,7 @@
   {
     baseborde:{
       adapter: 'mongo',
-      host: 'localhost',
+      host: '104.249.239.32',
       port: 27017,
       user: 'root',
       password: '',
