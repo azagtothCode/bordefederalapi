@@ -65,11 +65,19 @@ module.exports = module.export =
   get: function apiGET ( req, res, app, cb )
 {
 
-      console.log("geto",req.body.where);
-      if (!req.body.where) {
-          req.body.where={};
+      console.log("geto",req.body);
+      if (!req.body) {
+          req.body={};
       }
-  var q = app.models[ "legislators" ].find().where( req.body.where );//);
+			//  var www = JSON.stringify(req.body);
+			 //
+			//  var res = www.replace("{ legislator_score_sil: '50' }", "{ legislator_score_sil: {$qte:50} }");
+			 //
+			 //
+			//  var myobj = JSON.parse(res);
+			//  console.log(myobj);
+
+  var q = app.models[ "legislators" ].find({ "legislator_score_sil": { $gte: "50" }});//);
   if ( ! _.isEmpty( req.body.populate ) )
   {
     _.each( req.body.populate, function (p) {
