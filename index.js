@@ -24,6 +24,7 @@ var import_json_pt = require ('./import_json/import_json_pt.js');
 var import_json_pvem = require ('./import_json/import_json_pvem.js');
 var import_json_sg = require ('./import_json/import_json_sg.js');
 var import_json_social = require ('./import_json/import_json_social.js');
+var import_facebook = require ('./import_json/import_facebook.js');
 
 //Mandamos a llamar toda la info. del SIL y asignamos todas las propiedades a dicha variable
 var info_basica = require ('./scrappers/sil_info_basica');
@@ -232,6 +233,21 @@ app.get('/crawler/id_senado',function(req, res) { //Obtener klout diputados
   });
 });
 
+app.get('/init/score', function(req, res) {
+    import_score.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for BordeScore was successfully imported :)");
+    console.log(count+" legislators update with new Score");
+  });
+});
+
+app.get('/init/facebook', function(req, res) {
+    import_facebook.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for BordeScore was successfully imported :)");
+    console.log(count+" legislators update with new Facebook");
+  });
+});
 // EndPoint para recoger los datos basicos de la pagina del SIL
 // app.get('/crawler/sil/trabajo', function(req, res) {
 //   info_trabajo.legislativo_info(req, res, app, function(){
