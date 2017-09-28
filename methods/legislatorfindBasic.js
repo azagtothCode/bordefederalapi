@@ -65,7 +65,7 @@ module.exports = module.export =
   get: function apiGET ( req, res, app, cb )
 {
 
-      console.log("geto",req);
+      console.log("geto",req.body);
       if (!req.body) {
           req.body={};
       }
