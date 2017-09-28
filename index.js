@@ -105,7 +105,7 @@ app.post('/', function(req, res) {
 //   legisladores.get( req, res, app, next );
 // });
 
-app.post('/diputados/basic/get', function(req, res, next) {
+app.post('/diputados/basic/dip/get', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_basic.get( req, res, app, next );
 });
