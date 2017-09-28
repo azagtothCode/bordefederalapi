@@ -27,8 +27,25 @@ var import_json_social = require ('./import_json/import_json_social.js');
 var import_score = require ('./import_json/import_score.js');
 var import_facebook = require ('./import_json/import_facebook.js');
 
+//Traemos los identificadores del H. congreso de la union
+var import_json_morena_basic = require ('./import_json_basic/import_json_morena.js');
+var import_json_mov_basic = require ('./import_json_basic/import_json_mov.js');
+var import_json_pan_basic = require ('./import_json_basic/import_json_pan.js');
+var import_json_panal_basic = require ('./import_json_basic/import_json_panal.js');
+var import_json_prd_basic = require ('./import_json_basic/import_json_prd.js');
+var import_json_pri_basic = require ('./import_json_basic/import_json_pri.js');
+var import_json_pt_basic = require ('./import_json_basic/import_json_pt.js');
+var import_json_pvem_basic = require ('./import_json_basic/import_json_pvem.js');
+var import_json_sg_basic = require ('./import_json_basic/import_json_sg.js');
+var import_json_social_basic = require ('./import_json_basic/import_json_social.js');
+var import_score_basic = require ('./import_json_basic/import_score.js');
+var import_facebook_basic = require ('./import_json_basic/import_facebook.js');
+
 //Mandamos a llamar toda la info. del SIL y asignamos todas las propiedades a dicha variable
 var info_basica = require ('./scrappers/sil_info_basica');
+
+//Mandamos a llamar toda la info. del SIL y asignamos todas las propiedades a dicha variable
+var leg_info_basica = require ('./scrappers/sil_info_basica_legislators');
 
 //Mandamos a llamar toda la info. del SIL para trabajo legislativo
 //y asignamos todas las propiedades a dicha variable
@@ -47,12 +64,15 @@ var google_news = require ('./scrappers/google_news.js');
 
 //Herramientas generales
 var utilities = require ('./scrappers/utilities.js');
+var utilities_basic = require ('./scrappers/utilities.js');
+
 var comisiones = require ('./scrappers/comisiones.js');
 var senadoinfo =require ('./scrappers/senadoinfo.js');
 
 
 
 var legisladores =require ('./methods/legislatorfind.js');
+var legisladores_basic =require ('./methods/legislatorfindBasic.js');
 
 //Funciónes de control Vusal Borde
 var control= require ('./control/index.js');
@@ -80,9 +100,14 @@ app.post('/', function(req, res) {
     res.end(query2,query1);
 });
 
-app.post('/diputados/get', function(req, res, next) {
+// app.post('/diputados/get', function(req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   legisladores.get( req, res, app, next );
+// });
+
+app.post('/diputados/basic/get', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  legisladores.get( req, res, app, next );
+  legisladores_basic.get( req, res, app, next );
 });
 
 // SECCIÓN UNICAMENTE PÁRA TRABAJAR MÉTODS DE API
@@ -127,6 +152,7 @@ app.post('/consulta/graficas/perfil', function(req, res) {
 // De cada uno de los partidos politicos
 // donde agregamos id del SIL y camara a la que pertenece
 // enviamos como respuesta el total de registros insertados
+
 app.get('/init/morena', function(req, res) {
     import_json_morena.import_file (app, function (count){
     res.send(JSON.stringify({Total_Registers:count}));
@@ -206,7 +232,6 @@ app.get('/init/social', function(req, res) {
   });
 });
 
-// EndPoint para recoger los datos basicos de la pagina del SIL/
 app.get('/crawler/sil/basico', function(req, res) {
     info_basica.info_basic_get_sil(req, res, app, function(resultado){
     res.send(JSON.stringify(resultado));
@@ -250,6 +275,137 @@ app.get('/init/facebook', function(req, res) {
     console.log(count+" legislators update with new Facebook");
   });
 });
+
+// Iniciamos la base de datos, aqui importamos el archivo JSON
+// De cada uno de los partidos politicos
+// donde agregamos id del SIL y camara a la que pertenece la cual se guardara en la
+//nueva tbla legislators_basic solo para Index
+// enviamos como respuesta el total de registros insertados
+
+app.get('/init/basic/morena', function(req, res) {
+    import_json_morena_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party MORENA was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/mov', function(req, res) {
+    import_json_mov_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party MOVIMIENTO CIUDADANO was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/pan', function(req, res) {
+    import_json_pan_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PAN was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/panal', function(req, res) {
+    import_json_panal_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party NUEVA ALAIANZA was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/prd', function(req, res) {
+    import_json_prd_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PRD was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/pri', function(req, res) {
+    import_json_pri_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PRI was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+app.get('/init/basic/pt', function(req, res) {
+    import_json_pt_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PARTIDO DEL TRABAJO was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/pvem', function(req, res) {
+    import_json_pvem_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party VERDE ECOLOGISTA was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/sg', function(req, res) {
+    import_json_sg_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party INDEPENDIENTE / SIN GRUPO was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/basic/social', function(req, res) {
+    import_json_social_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party ENCUENTRO SOCIAL was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+// EndPoint para recoger los datos basicos de la pagina del SIL/
+app.get('/crawler/basic/sil', function(req, res) {
+    leg_info_basica.info_basic_get_sil(req, res, app, function(resultado){
+    res.send(JSON.stringify(resultado));
+    console.log(resultado);
+  });
+});
+
+app.get('/init/basic/score', function(req, res) {
+    import_score_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for BordeScore was successfully imported :)");
+    console.log(count+" legislators update with new Score");
+  });
+});
+
+app.get('/init/basic/facebook', function(req, res) {
+    import_facebook_basic.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for BordeScore was successfully imported :)");
+    console.log(count+" legislators update with new Facebook");
+  });
+});
+
+// EndPoint para recoger los datos basicos de la pagina del SIL
+app.get('/crawler/3d3fix/basic/sen',function(req, res) { //Crawl 3 de 3, twitter y fix nombres
+  utilities_basic.tresdetresFix("senador", req, res, app, function(data){
+    res.send(JSON.stringify(data));
+  });
+});
+
+// EndPoint para recoger los datos basicos de la pagina del SIL
+app.get('/crawler/3d3fix/basic/dip',function(req, res) { //Crawl 3 de 3, twitter y fix nombres
+  utilities_basic.tresdetresFix("diputado", req, res, app, function(data){
+    res.send(JSON.stringify(data));
+  });
+});
+
+app.get('/crawler/basic/id_senado',function(req, res) { //Obtener klout diputados
+  utilities_basic.id_senado(req, res, app, function(data){
+    res.send(JSON.stringify(data));
+
+  });
+});
+
 // EndPoint para recoger los datos basicos de la pagina del SIL
 // app.get('/crawler/sil/trabajo', function(req, res) {
 //   info_trabajo.legislativo_info(req, res, app, function(){

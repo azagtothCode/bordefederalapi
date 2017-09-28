@@ -79,5 +79,15 @@ module.exports = {
          via: 'comision'
        }
     }
+  },
+  legislators_basic: {
+       identity: 'legislators_basic',
+       connection: 'baseborde',
+       tableName: "legislators_basic",
+       attributes: {
+         id_legislative:{
+          type: 'string'
+         }
+      }
   }
 }

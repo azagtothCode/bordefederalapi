@@ -45,12 +45,14 @@
  }
 
   var legislators  = waterline.Collection.extend(export_models.legislators);
+  var legislators_basic  = waterline.Collection.extend(export_models.legislators_basic);
   var legislative_work  = waterline.Collection.extend(export_models.legislative_work);
   var legislative_workpoint  = waterline.Collection.extend(export_models.legislative_workpoint);
   var legislative_votation  = waterline.Collection.extend(export_models.legislative_votation);
   var commissions  = waterline.Collection.extend(export_models.commissions);
 
   construct_bd.loadCollection(legislators);
+  construct_bd.loadCollection(legislators_basic);
   construct_bd.loadCollection(legislative_work);
   construct_bd.loadCollection(legislative_workpoint);
   construct_bd.loadCollection(legislative_votation);
