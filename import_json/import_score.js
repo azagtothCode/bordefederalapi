@@ -33,7 +33,7 @@ module.exports = {
         async.forEachOf(obj_legislators, function(value, key, callback) {
 
           //imprimimos el archivo
-       	// 	console.log(value, key);
+       		console.log(value, key);
 
           app.models[ "legislators" ].update({legislator_name_sil:key},{
             legislator_score_sil:value
