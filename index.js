@@ -73,6 +73,7 @@ var senadoinfo =require ('./scrappers/senadoinfo.js');
 
 var legisladores =require ('./methods/legislatorfind.js');
 var legisladores_basic =require ('./methods/legislatorfindBasic.js');
+var legisladores_profile=require ('./methods/legislatorfindProfile.js');
 
 //Funciónes de control Vusal Borde
 var control= require ('./control/index.js');
@@ -113,6 +114,11 @@ app.post('/diputados/basic/dip/get', function(req, res, next) {
 app.post('/diputados/basic/sen/get', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_basic.get( req, res, app, next );
+});
+
+app.post('/diputados/profile/dip/get', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  legisladores_profile.get( req, res, app, next );
 });
 
 // SECCIÓN UNICAMENTE PÁRA TRABAJAR MÉTODS DE API
