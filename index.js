@@ -41,6 +41,12 @@ var import_json_social_basic = require ('./import_json_basic/import_json_social.
 var import_score_basic = require ('./import_json_basic/import_score.js');
 var import_facebook_basic = require ('./import_json_basic/import_facebook.js');
 
+//Traemos los datos para llenar los tabs de rol, extra, y noticias
+var import_rol = require ('./import_json/import_rol.js');
+var import_extra = require ('./import_json/import_extra.js');
+var import_news = require ('./import_json/import_news.js');
+
+
 //Mandamos a llamar toda la info. del SIL y asignamos todas las propiedades a dicha variable
 var info_basica = require ('./scrappers/sil_info_basica');
 
@@ -240,6 +246,30 @@ app.get('/init/social', function(req, res) {
     res.send(JSON.stringify({Total_Registers:count}));
     console.log("The JSON file for party ENCUENTRO SOCIAL was successfully imported :)");
     console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/rol', function(req, res) {
+    import_rol.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Rol Politico was successfully imported :)");
+    console.log(count+" legislators Rol Politico added");
+  });
+});
+
+app.get('/init/extra', function(req, res) {
+    import_extra.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Extra Legislativo was successfully imported :)");
+    console.log(count+" legislators Extra Legislativo added");
+  });
+});
+
+app.get('/init/news', function(req, res) {
+    import_news.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for News was successfully imported :)");
+    console.log(count+" legislators News added");
   });
 });
 
