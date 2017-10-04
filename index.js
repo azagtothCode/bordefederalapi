@@ -75,12 +75,17 @@ var utilities_basic = require ('./scrappers/utilities.js');
 var comisiones = require ('./scrappers/comisiones.js');
 var senadoinfo =require ('./scrappers/senadoinfo.js');
 
-
-
+//Busqueda de lesgialdores
 var legisladores =require ('./methods/legislatorfind.js');
 var legisladores_basic =require ('./methods/legislatorfindBasic.js');
 var legisladores_profile=require ('./methods/legislatorfindProfile.js');
 
+//iniciativas
+var import_ini_ap = require ('./import_json/import_ini_ap.js');
+var import_ini_de = require ('./import_json/import_ini_de.js');
+var import_ini_pe = require ('./import_json/import_ini_pe.js');
+var import_ini_pr = require ('./import_json/import_ini_pr.js');
+var import_ini_re = require ('./import_json/import_ini_re.js');
 //Funciónes de control Vusal Borde
 var control= require ('./control/index.js');
 
@@ -415,6 +420,47 @@ app.get('/init/basic/score', function(req, res) {
     res.send(JSON.stringify({Total_Registers:count}));
     console.log("The JSON file for BordeScore was successfully imported :)");
     console.log(count+" legislators update with new Score");
+  });
+});
+
+
+app.get('/init/ini_ap', function(req, res) {
+    import_ini_ap.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Iniciativas Aprobadas was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/ini_de', function(req, res) {
+    import_ini_de.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Iniciativas Desechadas was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/ini_pe', function(req, res) {
+    import_ini_pe.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Iniciativas Pendientes was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/ini_pr', function(req, res) {
+    import_ini_pr.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Iniciativas Presentadas was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/ini_re', function(req, res) {
+    import_ini_re.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Iniciativas Retiradas was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
   });
 });
 
