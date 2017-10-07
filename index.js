@@ -138,6 +138,11 @@ app.post('/diputados/party/get', function(req, res, next) {
   legisladores_party.get( req, res, app, next );
 });
 
+app.post('/diputados/state/get', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  legisladores_state.get( req, res, app, next );
+});
+
 // SECCIÓN UNICAMENTE PÁRA TRABAJAR MÉTODS DE API
 
 /*
