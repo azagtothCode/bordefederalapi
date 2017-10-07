@@ -79,6 +79,7 @@ var senadoinfo =require ('./scrappers/senadoinfo.js');
 var legisladores =require ('./methods/legislatorfind.js');
 var legisladores_basic =require ('./methods/legislatorfindBasic.js');
 var legisladores_profile=require ('./methods/legislatorfindProfile.js');
+var legisladores_party=require ('./methods/legislatorfindParty.js');
 
 //iniciativas
 var import_ini_ap = require ('./import_json/import_ini_ap.js');
@@ -130,6 +131,11 @@ app.post('/diputados/basic/sen/get', function(req, res, next) {
 app.post('/diputados/profile/dip/get', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_profile.get( req, res, app, next );
+});
+
+app.post('/diputados/party/get', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  legisladores_party.get( req, res, app, next );
 });
 
 // SECCIÓN UNICAMENTE PÁRA TRABAJAR MÉTODS DE API
