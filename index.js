@@ -82,6 +82,7 @@ var legisladores_profile=require ('./methods/legislatorfindProfile.js');
 var legisladores_party=require ('./methods/legislatorfindParty.js');
 var legisladores_state=require ('./methods/legislatorfindState.js');
 var legisladores_ini=require ('./methods/inifindProfile.js');
+var legisladores_pda=require ('./methods/pdafindProfile.js');
 
 //iniciativas
 var import_ini_ap = require ('./import_json/import_ini_ap.js');
@@ -155,6 +156,11 @@ app.post('/diputados/state/get', function(req, res, next) {
 app.post('/diputados/ini/dip/get', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_ini.get( req, res, app, next );
+});
+
+app.post('/diputados/pda/dip/get', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  legisladores_pda.get( req, res, app, next );
 });
 
 // SECCIÓN UNICAMENTE PÁRA TRABAJAR MÉTODS DE API
