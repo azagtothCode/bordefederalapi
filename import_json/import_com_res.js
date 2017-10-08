@@ -15,7 +15,7 @@ module.exports = {
       //cargamos el archivo JSON
       //err manda errores
       //data guarda la informacion
-      fs.readFile('./senators/import_como_res.json', 'utf8', function (err, data) {
+      fs.readFile('./senators/import_com_res.json', 'utf8', function (err, data) {
 
         //Si hubo problema al cargar el archivo avisamos
         if (err) throw err;
