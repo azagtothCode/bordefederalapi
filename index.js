@@ -99,6 +99,8 @@ var import_pda_pr = require ('./import_json/import_pda_pr.js');
 var import_pda_re = require ('./import_json/import_pda_re.js');
 
 var import_com_res = require ('./import_json/import_com_res.js');
+var import_google_res = require ('./import_json/import_google_res.js');
+var import_klout_res = require ('./import_json/import_klout_res.js');
 
 
 //Funciónes de control Vusal Borde
@@ -362,6 +364,23 @@ app.get('/init/com_res', function(req, res) {
     import_com_res.import_file (app, function (count){
     res.send(JSON.stringify({Total_Registers:count}));
     console.log("The JSON file for Score Comisiones was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+
+app.get('/init/klout_res', function(req, res) {
+    import_klout_res.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Score Klout was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/google_res', function(req, res) {
+    import_google_res.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Score Google was successfully imported :)");
     console.log(count+" legislators update with new Dates");
   });
 });
