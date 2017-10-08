@@ -88,6 +88,13 @@ var import_ini_de = require ('./import_json/import_ini_de.js');
 var import_ini_pe = require ('./import_json/import_ini_pe.js');
 var import_ini_pr = require ('./import_json/import_ini_pr.js');
 var import_ini_re = require ('./import_json/import_ini_re.js');
+
+//iniciativas
+var import_pda_ap = require ('./import_json/import_pda_ap.js');
+var import_pda_de = require ('./import_json/import_pda_de.js');
+var import_pda_pe = require ('./import_json/import_pda_pe.js');
+var import_pda_pr = require ('./import_json/import_pda_pr.js');
+var import_pda_re = require ('./import_json/import_pda_re.js');
 //Funciónes de control Vusal Borde
 var control= require ('./control/index.js');
 
@@ -472,6 +479,46 @@ app.get('/init/ini_re', function(req, res) {
     import_ini_re.import_file (app, function (count){
     res.send(JSON.stringify({Total_Registers:count}));
     console.log("The JSON file for Iniciativas Retiradas was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/pda_ap', function(req, res) {
+    import_pda_ap.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for P. Acuerdo was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/pda_de', function(req, res) {
+    import_pda_de.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for P. Acuerdo Desechadas was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/ipda_pe', function(req, res) {
+    import_pda_pe.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for P. Acuerdo Pendientes was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/pda_pr', function(req, res) {
+    import_pda_pr.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for P. Acuerdo Presentadas was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
+app.get('/init/pda_re', function(req, res) {
+    import_pda_re.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for P. Acuerdo Retiradas was successfully imported :)");
     console.log(count+" legislators update with new Dates");
   });
 });
