@@ -77,7 +77,7 @@ module.exports = module.export =
 			//  var myobj = JSON.parse(res);
 			//  console.log(myobj);
 
-  var q = app.models[ "legislative_workpoint" ].find().sort().where(req.body);//);
+  var q = app.models[ "legislative_workpoint" ].find().sort().where();//);
   if ( ! _.isEmpty( req.body.populate ) )
   {
     _.each( req.body.populate, function (p) {
