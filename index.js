@@ -97,6 +97,10 @@ var import_pda_de = require ('./import_json/import_pda_de.js');
 var import_pda_pe = require ('./import_json/import_pda_pe.js');
 var import_pda_pr = require ('./import_json/import_pda_pr.js');
 var import_pda_re = require ('./import_json/import_pda_re.js');
+
+var import_com_res = require ('./import_json/import_com_res.js');
+
+
 //Funciónes de control Vusal Borde
 var control= require ('./control/index.js');
 
@@ -350,6 +354,15 @@ app.get('/init/facebook', function(req, res) {
     res.send(JSON.stringify({Total_Registers:count}));
     console.log("The JSON file for BordeScore was successfully imported :)");
     console.log(count+" legislators update with new Facebook");
+  });
+});
+
+
+app.get('/init/com_res', function(req, res) {
+    import_com_res.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Score Comisiones was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
   });
 });
 
