@@ -499,7 +499,7 @@ app.get('/init/pda_de', function(req, res) {
   });
 });
 
-app.get('/init/ipda_pe', function(req, res) {
+app.get('/init/pda_pe', function(req, res) {
     import_pda_pe.import_file (app, function (count){
     res.send(JSON.stringify({Total_Registers:count}));
     console.log("The JSON file for P. Acuerdo Pendientes was successfully imported :)");
