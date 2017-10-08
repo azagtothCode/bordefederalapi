@@ -92,10 +92,9 @@ function paginaSilCrawl(app,control_trabajo,url,finish){
                         var href = $(elema).attr("onclick");
                         if(href){
                           var unico = href.split('Referencia=')[1].split('",')[0];
-                          autores.push(unico);
+                          iniciativa["author_id"]=unico;
                         }
                       });
-                      iniciativa["author_id"]=autores;
                       // console.log(iniciativa["author_id"]);
                     break;
                     case 9: //Temas
