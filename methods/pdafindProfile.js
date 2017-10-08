@@ -49,7 +49,7 @@ module.exports = module.export =
   post: function post ( req, res, app, cb )
 {
 
-      app.models[ "legislative_workpoint" ].create(req.body).exec(function createCB(err, created){
+      app.models[ "legislative_work" ].create(req.body).exec(function createCB(err, created){
           console.log("err:"+err);
           console.log("body",req.body);
           res.end( JSON.stringify( created ) );
@@ -77,7 +77,7 @@ module.exports = module.export =
 			//  var myobj = JSON.parse(res);
 			//  console.log(myobj);
 
-  var q = app.models[ "legislative_workpoint" ].find();//);
+  var q = app.models[ "legislative_work" ].find().sort().where(req.body);//);
   if ( ! _.isEmpty( req.body.populate ) )
   {
     _.each( req.body.populate, function (p) {
