@@ -81,7 +81,7 @@ var legisladores_basic =require ('./methods/legislatorfindBasic.js');
 var legisladores_profile=require ('./methods/legislatorfindProfile.js');
 var legisladores_party=require ('./methods/legislatorfindParty.js');
 var legisladores_state=require ('./methods/legislatorfindState.js');
-var legisladores_ini=require ('./methods/iniFindProfile.js');
+var legisladores_ini=require ('./methods/inifindProfile.js');
 
 //iniciativas
 var import_ini_ap = require ('./import_json/import_ini_ap.js');
