@@ -35,7 +35,7 @@ module.exports = {
           //imprimimos el archivo
        		console.log(value, key);
 
-          app.models[ "legislators_basic" ].update({id_legislator_sil:key},{
+          app.models[ "legislators" ].update({id_legislator_sil:key},{
             legislator_ini_ap_sil:value
           }).exec(function afterwards(err, updated){
             //print all

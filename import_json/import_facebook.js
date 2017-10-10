@@ -36,7 +36,7 @@ module.exports = {
        	// 	console.log(value, key);
 
           app.models[ "legislators" ].update({legislator_name_sil:key},{
-            legislator_facebook_sil:value
+            id_legislator_sil:value
           }).exec(function afterwards(err, updated){
             //print all
             console.log('Updated',updated,err);
