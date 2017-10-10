@@ -24,13 +24,13 @@
   var config_bd =
   {
     adapters:{
-      'default': 'mongod',
+      'default': 'mongo',
       mongo: con_mongo
     },
   connections:
   {
     baseborde:{
-      adapter: 'mongod',
+      adapter: 'mongo',
       host: 'localhost',
       // host: '104.239.249.32',
       port: 27017,
