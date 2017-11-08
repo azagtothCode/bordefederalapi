@@ -10,10 +10,11 @@ var bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
-// Requerimos la configuracion de la base datos
+// Requerimos la configuracion de la base datos-
 require ('./configbd/configdb.js')(app);
 
-//Traemos los identificadores del H. congreso de la union
+//Traemos los identificadores del H. congreso de la union.
+//Traemos los identificadores del H. congreso de la union.
 var import_json_morena = require ('./import_json/import_json_morena.js');
 var import_json_mov = require ('./import_json/import_json_mov.js');
 var import_json_pan = require ('./import_json/import_json_pan.js');
@@ -30,6 +31,7 @@ var import_score = require ('./import_json/import_score.js');
 var import_facebook = require ('./import_json/import_facebook.js');
 
 
+//Traemos los datos para llenar los tabs de rol, extra, y noticias
 //Traemos los datos para llenar los tabs de rol, extra, y noticias
 var import_rol = require ('./import_json/import_rol.js');
 var import_extra = require ('./import_json/import_extra.js');

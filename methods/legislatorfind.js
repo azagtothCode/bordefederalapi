@@ -7,7 +7,7 @@ var _ = require('lodash')
 
 if (process.env.NODE_ENV=='development') console.log("API has loaded");
 
-// All purpose array check for docs, And response, It calls the done that is attached to this via bind.
+// All purpose array check for docs, And response, It calls the done that is attached to this via bind..
 
 var returnDocs = function returnDocs ( err, docs )
 {
@@ -18,7 +18,7 @@ var returnDocs = function returnDocs ( err, docs )
 
 };
 
-// All purpose async.auto done callback.
+// All purpose async.auto done callback..
 
 var autoDone =  function autoDone ( err, results )
 {
@@ -77,7 +77,7 @@ module.exports = module.export =
 			//  var myobj = JSON.parse(res);
 			//  console.log(myobj);
 
-  var q = app.models[ "legislators" ].find(req.body).sort( { "legislator_score_sil": -1 }  );//);
+  var q = app.models[ "legislators" ].find().sort( { "legislator_score_sil": -1 }  );//);
   if ( ! _.isEmpty( req.body.populate ) )
   {
     _.each( req.body.populate, function (p) {
