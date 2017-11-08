@@ -6,7 +6,7 @@ var app = express();
 
 var bodyparser = require("body-parser");
 
-//Here we are configuring express to use bodyparser as middleware.
+//Here we are configuring express to use bodyparser as middleware..
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
