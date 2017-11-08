@@ -4,11 +4,11 @@ var express = require('express');
 // El objeto app denomina convencionalmente la palicacion de express
 var app = express();
 
-var bodyParser = require("bodyparser");
+var bodyparser = require("body-parser");
 
 //Here we are configuring express to use bodyparser as middleware.
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 
 // Requerimos la configuracion de la base datos
 require ('./configbd/configdb.js')(app);
