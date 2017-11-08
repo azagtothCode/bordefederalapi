@@ -369,6 +369,14 @@ app.get('/init/google_res', function(req, res) {
   });
 });
 
+app.get('/init/import_ini_ap', function(req, res) {
+    import_ini_ap.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for Score Google was successfully imported :)");
+    console.log(count+" legislators update with new Dates");
+  });
+});
+
 
 // EndPoint para recoger los datos basicos de la pagina del SIL
 // app.get('/crawler/sil/trabajo', function(req, res) {
