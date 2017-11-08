@@ -4,9 +4,9 @@ var express = require('express');
 // El objeto app denomina convencionalmente la palicacion de express
 var app = express();
 
-var bodyParser = require("body-parser");
+var bodyParser = require("bodyparser");
 
-//Here we are configuring express to use body-parser as middle-ware.
+//Here we are configuring express to use bodyparser as middleware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -93,10 +93,10 @@ var control= require ('./control/index.js');
 var csvv= require ('./csv/import_csv.js');
 
 app.use(function (req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "http://localhost");
-  res.header("Access-Control-Allow-Origin", "http://104.239.249.32");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  // res.header("AccessControlAllowOrigin", "http://localhost");
+  res.header("AccessControlAllowOrigin", "http://104.239.249.32");
+  res.header('AccessControlAllowMethods', 'GET,PUT,POST,DELETE');
+  res.header("AccessControlAllowHeaders", "XRequestedWith, ContentType");
   next();
 });
 
@@ -114,42 +114,42 @@ app.post('/', function(req, res) {
 });
 
 // app.post('/diputados/get', function(req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('AccessControlAllowOrigin', '*');
 //   legisladores.get( req, res, app, next );
 // });
 
 app.post('/diputados/dip/get', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('AccessControlAllowOrigin', '*');
   legisladores.get( req, res, app, next );
 });
 
 app.post('/diputados/sen/get', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('AccessControlAllowOrigin', '*');
   legisladores.get( req, res, app, next );
 });
 
 app.post('/diputados/profile/dip/get', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('AccessControlAllowOrigin', '*');
   legisladores_profile.get( req, res, app, next );
 });
 
 app.post('/diputados/party/get', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('AccessControlAllowOrigin', '*');
   legisladores_party.get( req, res, app, next );
 });
 
 app.post('/diputados/state/get', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('AccessControlAllowOrigin', '*');
   legisladores_state.get( req, res, app, next );
 });
 
 app.post('/diputados/ini/dip/get', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('AccessControlAllowOrigin', '*');
   legisladores_ini.get( req, res, app, next );
 });
 
 app.post('/diputados/pda/dip/get', function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('AccessControlAllowOrigin', '*');
   legisladores_pda.get( req, res, app, next );
 });
 
@@ -369,13 +369,85 @@ app.get('/init/google_res', function(req, res) {
   });
 });
 
-app.get('/init/import_ini_ap', function(req, res) {
-    import_ini_ap.import_file (app, function (count){
-    res.send(JSON.stringify({Total_Registers:count}));
-    console.log("The JSON file for Score Google was successfully imported :)");
-    console.log(count+" legislators update with new Dates");
-  });
-});
+app.get('/init/ini_ap', function(req, res) {
+     import_ini_ap.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Aprobadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_de', function(req, res) {
+     import_ini_de.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Desechadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_pe', function(req, res) {
+     import_ini_pe.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Pendientes was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_pr', function(req, res) {
+     import_ini_pr.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Presentadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_re', function(req, res) {
+     import_ini_re.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Retiradas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_ap', function(req, res) {
+     import_pda_ap.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_de', function(req, res) {
+     import_pda_de.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Desechadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_pe', function(req, res) {
+     import_pda_pe.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Pendientes was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_pr', function(req, res) {
+     import_pda_pr.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Presentadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_re', function(req, res) {
+     import_pda_re.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Retiradas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
 
 
 // EndPoint para recoger los datos basicos de la pagina del SIL
@@ -425,20 +497,20 @@ app.get('/crawler/comisiones/join',function(req, res) { //Obtener klout diputado
   });
 })
 
-//<------------>
+//<>
 
 
 app.get('/crawler/news/google', function(req, res) {
   google_news.google(req, res, app, function (control){
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('ContentType', 'application/json');
     res.send(JSON.stringify(control));
   });
 });
 
-//<------------>
+//<>
 
 
-//<------------>
+//<>
 
 app.get('/crawler/klout/sen',function(req, res) { //Obtener klout senado
   utilities.klout("senador", req, res, app, function(data){
@@ -461,13 +533,13 @@ app.get('/crawler/asistencia/sen',function(req, res) { //Obtener klout diputados
 
 app.get('/control/trabajo_fechas',function(req, res) { //Obtener klout diputados
   control.trabajo_fechas([],app, function(response){
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('ContentType', 'application/json');
     res.send(JSON.stringify(response));
   });
 })
 app.get('/control/exportranking',function(req, res) { //Obtener klout diputados
   control.exportRanking(req,res,app, function(response){
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('ContentType', 'application/json');
     res.send(JSON.stringify(response) );
   });
 })
@@ -493,7 +565,7 @@ app.listen('8000');
 // console.log("***** @VERSION 1.0                                           *****");
 // console.log("******************************************************************");
 // console.log("******************************************************************");
-// console.log("***** METHODS-GET API BACK-END                               *****");
+// console.log("***** METHODSGET API BACKEND                               *****");
 // console.log("***** /init                     || IMPORT JSON LEGISLATORS   *****");
 // console.log("***** /crawler/sil/basico       || BASIC INFO LEGISLATORS    *****");
 // console.log("***** /crawler/3d3fix/sen       || BASIC 3de3 SENATORS       *****");
@@ -503,7 +575,7 @@ app.listen('8000');
 // console.log("***** /crawler/comisiones/dip   || COMMISIONS DEPUTY         *****");
 // console.log("******************************************************************");
 // console.log("******************************************************************");
-// console.log("***** METHODS-POST API BACK-END                              *****");
+// console.log("***** METHODSPOST API BACKEND                              *****");
 // console.log("***** /crawler/sil/trabajo      || INFO LEGISLATIVE WORK     *****");
 // console.log("******************************************************************");
 // console.log("*****            *   THE SOUND OF PERSEVERANCE   *           *****");
