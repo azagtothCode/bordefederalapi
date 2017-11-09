@@ -96,7 +96,7 @@ var csvv= require ('./csv/import_csv.js');
 
 app.use(function (req, res, next) {
   // res.header("AccessControlAllowOrigin", "http://localhost");
-  res.header("AccessControlAllowOrigin", "http://104.239.249.32");
+  res.header("AccessControlAllowOrigin", "*");
   res.header('AccessControlAllowMethods', 'GET,PUT,POST,DELETE');
   res.header("AccessControlAllowHeaders", "XRequestedWith, ContentType");
   next();
