@@ -7,7 +7,7 @@ var _ = require('lodash')
 
 if (process.env.NODE_ENV=='development') console.log("API has loaded");
 
-// All purpose array check for docs, And response, It calls the done that is attached to this via bind..
+// All purpose array check for docs, And response, It calls the done that is attached to this via bind.
 
 var returnDocs = function returnDocs ( err, docs )
 {
