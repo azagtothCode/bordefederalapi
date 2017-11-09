@@ -95,8 +95,8 @@ var control= require ('./control/index.js');
 var csvv= require ('./csv/import_csv.js');
 
 app.use(function (req, res, next) {
-  // res.header("AccessControlAllowOrigin", "http://localhost");
-  res.header("AccessControlAllowOrigin", "http://104.239.249.32");
+  // res.header("Access-Control-Allow-Origin", "http://localhost");
+  res.header("Access-Control-Allow-Origin", "http://104.239.249.32");
   res.header('AccessControlAllowMethods', 'GET,PUT,POST,DELETE');
   res.header("AccessControlAllowHeaders", "XRequestedWith, ContentType");
   next();
@@ -116,42 +116,42 @@ app.post('/', function(req, res) {
 });
 
 // app.post('/diputados/get', function(req, res, next) {
-//   res.setHeader('AccessControlAllowOrigin', '*');
+//   res.setHeader('Access-Control-Allow-Origin', '*');
 //   legisladores.get( req, res, app, next );
 // });
 
 app.post('/diputados/dip/get', function(req, res, next) {
-  res.setHeader('AccessControlAllowOrigin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores.get( req, res, app, next );
 });
 
 app.post('/diputados/sen/get', function(req, res, next) {
-  res.setHeader('AccessControlAllowOrigin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores.get( req, res, app, next );
 });
 
 app.post('/diputados/profile/dip/get', function(req, res, next) {
-  res.setHeader('AccessControlAllowOrigin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_profile.get( req, res, app, next );
 });
 
 app.post('/diputados/party/get', function(req, res, next) {
-  res.setHeader('AccessControlAllowOrigin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_party.get( req, res, app, next );
 });
 
 app.post('/diputados/state/get', function(req, res, next) {
-  res.setHeader('AccessControlAllowOrigin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_state.get( req, res, app, next );
 });
 
 app.post('/diputados/ini/dip/get', function(req, res, next) {
-  res.setHeader('AccessControlAllowOrigin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_ini.get( req, res, app, next );
 });
 
 app.post('/diputados/pda/dip/get', function(req, res, next) {
-  res.setHeader('AccessControlAllowOrigin', '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   legisladores_pda.get( req, res, app, next );
 });
 
