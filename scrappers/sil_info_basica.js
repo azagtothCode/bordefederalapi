@@ -10,7 +10,7 @@ module.exports = {
     var legislstors_all = [];
      var c = new crawler({
         forceUTF8:true,
-		    maxConnections : 1000,
+		    maxConnections : 500,
 		    callback : function (error, result, done) {
 
             var $=result.$;
