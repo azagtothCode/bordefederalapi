@@ -10,7 +10,7 @@ module.exports = {
     var legislstors_all = [];
      var c = new crawler({
         forceUTF8:true,
-		    maxConnections : 500,
+		    maxConnections : 100000,
 		    callback : function (error, result, done) {
 
             var $=result.$;
@@ -24,7 +24,7 @@ module.exports = {
 			    	$('table[border="1"]').eq(0).find(".tdcriterio").each(function(index, elem) {
 			    		cat=$(elem).text();
 			    		valelem=$(elem).parent("tr").find(".tddatosazul");
-			    		val=$(elem).parent("tr").find(".tddatosazul").text();
+              val=$(elem).parent("tr").find(".tddatosazul").text();
 
 			    		if (cat.indexOf("Nombre")>-1) { // guardamos el nombre
 
@@ -38,6 +38,8 @@ module.exports = {
 			    		}
 			    		else if (cat.indexOf("Partido")>-1) { //
 			    			dip["legislator_party_sil"]=val;
+			    		}else if (cat.indexOf("Estatus")>-1) { //
+			    			dip["legislator_status_sil"]=val;
 			    		}
 			    		else if (cat.indexOf("Nacimiento")>-1) { // name
 			    			ages=val.split("Fecha: ");
@@ -48,10 +50,13 @@ module.exports = {
 			    			dip["legislator_age_sil"]=ages3;
 			    		}
 			    		else if (cat.indexOf("Correo")>-1) { // name
-
 			    			dip["legislator_mail_sil"]=val;
-
-
+			    		}
+              else if (cat.indexOf("Suplente")>-1) { // name
+                var hrefSupl = $(elem).parent("tr").find("a").attr("href");
+                idSupl=hrefSupl.split("Referencia=")[1];
+                var resSupl = idSupl.slice(0, 7);
+			    			dip["legislator_supl_sil"]=resSupl;
 			    		}
 			    		else if (cat.indexOf("Zona")>-1) { // name
 			    			val=$(elem).parent("tr").find(".tddatosazul").html();
@@ -91,9 +96,15 @@ module.exports = {
 					    		puesto=cleanText( $(elem).find("td").eq(1).text() );
 					    		comision=cleanText( $(elem).find("td").eq(0).text() );
                   status=$(elem).find("td").eq(4).text() ;
-                  if(status == "ACTIVO" && comision.indexOf("(Com. Perm.)") == -1 ){
-                    comision=comision.replace(" (C. Diputados)",",Dip.").replace(" (C. Senadores)",",Sen.");
+                  fechaIn=$(elem).find("td").eq(2).text() ;
+                  fechaFn=$(elem).find("td").eq(3).text() ;
+                  if( comision.indexOf("(Com. Perm.)") == -1 ){
+                    comision=comision.replace(" (C. Diputados)",",").replace(" (C. Senadores)",",");
                     arr_commission = comision.split(",");
+
+                    if(status=="ACTIVO"){
+                      dip["legislator_commission_sil"].push({legislator_post_sil:puesto, legislator_namecom_sil:arr_commission[0], legislator_status_sil:status, commision_fechaIn:fechaIn, commision_fechaFn:fechaFn });
+                    }
                     // console.log("Soy resultado type",arr_commission);
 
                     //  app.models[ "commissions" ].find( { select: [ 'id', 'id_comission', 'name_comission'], name_comission:arr_commission[0] } ).exec(function (err, updated){
@@ -103,7 +114,6 @@ module.exports = {
                         // dip["legislator_commission_sil"].push({legislator_post_ids_sil:updated[0]['id_comission']});
                     //  });
 
-                     dip["legislator_commission_sil"].push({legislator_post_sil:puesto, legislator_namecom_sil:arr_commission[0], legislator_status_sil:status });
 
                   }
 							}
