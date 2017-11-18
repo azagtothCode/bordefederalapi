@@ -275,8 +275,9 @@ function cleancom(turno){
 	return r;
 }
 function getKlout(twt,cb){ //obtiene el klout score a partir de la cuenta de twuitter
-	console.log("HOLA",twt);
-	klout.getKloutIdentity(twt, function(error, klout_user) {
+  twtSinEsp = twt.trim().replace(" ", "-");
+	console.log("HOLA",twtSinEsp);
+	klout.getKloutIdentity(twtSinEsp, function(error, klout_user) {
 		   console.log("SALUDOS",error, klout_user);
 		   klout.getUser(klout_user.id, function(error, klout_response) {
 			    console.log("ADIOS",klout_response);

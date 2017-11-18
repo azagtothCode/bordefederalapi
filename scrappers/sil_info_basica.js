@@ -10,7 +10,7 @@ module.exports = {
     var legislstors_all = [];
      var c = new crawler({
         forceUTF8:true,
-		    maxConnections : 100000,
+		    maxConnections : 1000000,
 		    callback : function (error, result, done) {
 
             var $=result.$;
@@ -76,7 +76,6 @@ module.exports = {
 			    			}
 			    			dip["legislator_election_sil"]=val;
 			    		}
-
 			    	});
 					num=0;
 					tit="";
