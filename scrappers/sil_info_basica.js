@@ -16,17 +16,18 @@ module.exports = {
             var $=result.$;
 			    	var uri = result.options.uri;
 
-			    	id=uri.split("Referencia=")[1];
-			    	dip={};
-			    	//dip.legislator_id_sil=id;
-            console.log("Updating legislator information await...");
-            console.log("Find " + id);
+			    	id=uri.split("Referencia=")[1]; // Get Id Legislator
+			    	dip={}; //Object for save dates legislators
+
+            console.log("Updating legislator information await..."); //Print Message Await
+            console.log("Find " + id); //Print Message with result and legislator Id
+
 			    	$('table[border="1"]').eq(0).find(".tdcriterio").each(function(index, elem) {
 			    		cat=$(elem).text();
 			    		valelem=$(elem).parent("tr").find(".tddatosazul");
               val=$(elem).parent("tr").find(".tddatosazul").text();
 
-			    		if (cat.indexOf("Nombre")>-1) { // guardamos el nombre
+			    		if (cat.indexOf("Nombre")>-1) {
 
 			    			val=$(elem).parent("tr").find(".tddatosazul").find("b").text();//.find("b").text();
 			    			vals=val.split(", ");
@@ -77,12 +78,12 @@ module.exports = {
 			    			dip["legislator_election_sil"]=val;
 			    		}
 			    	});
+
 					num=0;
 					tit="";
           dip["legislator_commission_sil"]=[];
 					$("img").each(function(index,elem) {
 						src=$(elem).attr("src");
-
 					});
 					$('table[border="1"]').eq(1).find("tr").each(function(index, elem) {
 						if(num==0){
@@ -91,35 +92,50 @@ module.exports = {
 						else{
 							if(tit=="Comisión"){
 								all=$(elem).text();
-					    		//console.log("-_-"+ all)
 					    		puesto=cleanText( $(elem).find("td").eq(1).text() );
 					    		comision=cleanText( $(elem).find("td").eq(0).text() );
                   status=$(elem).find("td").eq(4).text() ;
                   fechaIn=$(elem).find("td").eq(2).text() ;
                   fechaFn=$(elem).find("td").eq(3).text() ;
-                  if( comision.indexOf("(Com. Perm.)") == -1 ){
-                    comision=comision.replace(" (C. Diputados)",",").replace(" (C. Senadores)",",");
-                    arr_commission = comision.split(",");
-
-                    if(status=="ACTIVO"){
-                      dip["legislator_commission_sil"].push({legislator_post_sil:puesto, legislator_namecom_sil:arr_commission[0], legislator_status_sil:status, commision_fechaIn:fechaIn, commision_fechaFn:fechaFn });
-                    }
-                    // console.log("Soy resultado type",arr_commission);
-
-                    //  app.models[ "commissions" ].find( { select: [ 'id', 'id_comission', 'name_comission'], name_comission:arr_commission[0] } ).exec(function (err, updated){
-                    //     if(updated && updated.length != 0 && updated != " "){
-                    //       legislator_id_commission_sil.push({legislator_post_ids_sil:updated[0]['id_comission'],name:updated[0]['name_comission']});
-                    //     }
-                        // dip["legislator_commission_sil"].push({legislator_post_ids_sil:updated[0]['id_comission']});
-                    //  });
-
-
-                  }
+                if( comision.indexOf("(Com. Perm.)") == -1 ){
+                  comision=comision.replace(" (C. Diputados)",",").replace(" (C. Senadores)",",");
+                  arr_commission = comision.split(",");
+                    dip["legislator_commission_sil"].push({legislator_post_sil:puesto, legislator_namecom_sil:arr_commission[0], legislator_status_sil:status, commision_fechaIn:fechaIn, commision_fechaFn:fechaFn });
+                }
 							}
 						}
-						num+=1;
-
+				      num+=1;
 			    	});
+
+            num=0;
+            tit="";
+            dip["legislator_organ_sil"]=[];
+            $('table').eq(6).each(function(index, elem) {
+              // tit=$(elem).find("td");
+
+              if(num==0){
+                tit=$(elem).find("td").eq(0).text();
+                console.log("Soy elem",tit);
+                process.exit();
+
+              }else{
+              if(tit=="Organo"){
+                all=$(elem).text();
+                  puesto=cleanText( $(elem).find("td").eq(1).text() );
+                  organo=cleanText( $(elem).find("td").eq(0).text() );
+                  status=$(elem).find("td").eq(4).text() ;
+                  fechaIn=$(elem).find("td").eq(2).text() ;
+                  fechaFn=$(elem).find("td").eq(3).text() ;
+                  if( organo.indexOf("(Com. Perm.)") == -1 ){
+                    organo = organo.replace(" (C. Diputados)",",").replace(" (C. Senadores)",",");
+                    arr_org = organo.split(",");
+                      dip["legislator_organ_sil"].push({legislator_post_sil:puesto, legislator_nameorg_sil:arr_org[0], legislator_status_sil:status, org_fechaIn:fechaIn, org_fechaFn:fechaFn });
+                  }
+                }
+              }
+                num+=1;
+              });
+
 			    	num=0;
 			    	tit="";
 			    	dip["legislator_trajectory_sil"]=[];
@@ -161,8 +177,8 @@ module.exports = {
 
 			    	dip["legislator_image_sil"]=$('img[alt="Foto del Legislador"]').attr("src");
 			    	dip["legislator_link_sil"]=uri;
-            dip["legislator_order_sil"]="Federal";
-  					dip["legislator_score_sil"]=0;
+            dip["legislator_score_sil"]=0;
+  					dip["legislator_legislature_sil"]="LXIII";
   					//dip["legislator_sil_id"]=id;
 
                   app.models[ "legislators" ].update({id_legislator_sil:id},dip).exec(function afterwards(err, updated){//{trayectoria:dip.trayectoria , silid:dip.uriid}).exec(function afterwards(err, updated){
@@ -170,7 +186,6 @@ module.exports = {
               });
 			    }
 			});
-
 
 			////////////
       app.models[ "legislators" ].find().exec(function (err, dips){
