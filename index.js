@@ -14,7 +14,6 @@ app.use(bodyparser.json());
 require ('./configbd/configdb.js')(app);
 
 //Traemos los identificadores del H. congreso de la union.
-//Traemos los identificadores del H. congreso de la union.
 var import_json_morena = require ('./import_json/import_json_morena.js');
 var import_json_mov = require ('./import_json/import_json_mov.js');
 var import_json_pan = require ('./import_json/import_json_pan.js');
@@ -25,18 +24,16 @@ var import_json_pt = require ('./import_json/import_json_pt.js');
 var import_json_pvem = require ('./import_json/import_json_pvem.js');
 var import_json_sg = require ('./import_json/import_json_sg.js');
 var import_json_social = require ('./import_json/import_json_social.js');
+var import_json_legant = require ('./import_json/import_json_legant.js');
 
 //Importamos s
 var import_score = require ('./import_json/import_score.js');
 var import_facebook = require ('./import_json/import_facebook.js');
 
-
-//Traemos los datos para llenar los tabs de rol, extra, y noticias
 //Traemos los datos para llenar los tabs de rol, extra, y noticias
 var import_rol = require ('./import_json/import_rol.js');
 var import_extra = require ('./import_json/import_extra.js');
 var import_news = require ('./import_json/import_news.js');
-
 
 //Mandamos a llamar toda la info. del SIL y asignamos todas las propiedades a dicha variable
 var info_basica = require ('./scrappers/sil_info_basica');
@@ -273,6 +270,14 @@ app.get('/init/social', function(req, res) {
     import_json_social.import_file (app, function (count){
     res.send(JSON.stringify({Total_Registers:count}));
     console.log("The JSON file for party ENCUENTRO SOCIAL was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/legant', function(req, res) {
+    import_json_legant.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for legislature LXII was successfully imported :)");
     console.log(count+" legislators added");
   });
 });

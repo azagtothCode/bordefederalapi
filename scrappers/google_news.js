@@ -49,6 +49,7 @@ module.exports = module.export =
 
 					idl=idList[legis];
 					unixdate=moment().unix();
+
 					//control
 					app.models[ "legislators" ].update({id:idl},{c_news:unixdate,c_news_r:response.items}).exec(function afterwards(err, updated){//{trayectoria:dip.trayectoria , silid:dip.uriid}).exec(function afterwards(err, updated){
 					  	console.log('Updated ');
