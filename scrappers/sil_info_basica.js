@@ -43,13 +43,23 @@ module.exports = {
 			    			dip["legislator_status_sil"]=val;
 			    		}
 			    		else if (cat.indexOf("Nacimiento")>-1) { // name
-			    			ages=val.split("Fecha: ");
-			    			if (ages[1]) {
-			    				ages2=ages[1].split('Entidad');
-			    				ages3=ages2[0];
-			    			}
-			    			dip["legislator_age_sil"]=ages3;
+                ages=val.split('Fecha: ').join(',').split('Entidad:').join(',').split('Ciudad:').join(',').split(',')
+
+                dip["legislator_age_sil"]=ages[1];
+
+                if(ages[2]==" "){
+                  dip["legislator_state_sil"]="S/E";
+                }else{
+                  dip["legislator_state_sil"]=ages[2];
+                }
+
+                if(ages[3]==" "){
+                  dip["legislator_city_sil"]="S/C";
+                }else{
+                  dip["legislator_city_sil"]=ages[3];
+                }
 			    		}
+
 			    		else if (cat.indexOf("Correo")>-1) { // name
 			    			dip["legislator_mail_sil"]=val;
 			    		}
@@ -59,13 +69,7 @@ module.exports = {
                 var resSupl = idSupl.slice(0, 7);
 			    			dip["legislator_supl_sil"]=resSupl;
 			    		}
-			    		else if (cat.indexOf("Zona")>-1) { // name
-			    			val=$(elem).parent("tr").find(".tddatosazul").html();
-			    			vals=val.split("<br>")
-			    			vals2=vals[0].split("Entidad: ")
-			    			dip["legislator_state_sil"]=vals2[1];
-			    		}
-			    		else if (cat.indexOf("Principio de")>-1) { // name
+              else if (cat.indexOf("Principio de")>-1) { // name
 			    			if (val.indexOf("Relativa")>-1) {
 			    				val="MR";
 			    			}
@@ -77,6 +81,16 @@ module.exports = {
 			    			}
 			    			dip["legislator_election_sil"]=val;
 			    		}
+			    		else if (cat.indexOf("Zona")>-1) { // name
+			    			val=$(elem).parent("tr").find(".tddatosazul").html();
+			    			vals=val.split("<br>")
+			    			vals2=vals[0].split("Entidad: ")
+			    			dip["legislator_zone_sil"]=vals2[1];
+			    		}
+              else if (cat.indexOf("Toma de")>-1) { // name
+                dip["legislator_protest_sil"]=val;
+              }
+
 			    	});
 
 					num=0;
@@ -110,14 +124,11 @@ module.exports = {
             num=0;
             tit="";
             dip["legislator_organ_sil"]=[];
-            $('table').eq(6).each(function(index, elem) {
+            $('table[border="1"]').eq(2).find("tr").each(function(index, elem) {
               // tit=$(elem).find("td");
 
               if(num==0){
                 tit=$(elem).find("td").eq(0).text();
-                console.log("Soy elem",tit);
-                process.exit();
-
               }else{
               if(tit=="Organo"){
                 all=$(elem).text();
