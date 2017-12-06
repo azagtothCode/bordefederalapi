@@ -24,7 +24,7 @@ orderednews={};
 module.exports ={
 	tresdetresFix: function ( chamber, req, res, app, regreso ){ //crawl página de tres de  para lista de twitter y nombres
 		dipnames={};
-		app.models[ "legislators_basic" ].find({ legislator_chamber_sil:chamber }, { legislator_name_sil: 1 }).exec(function createCB(err, list){
+		app.models[ "legislators" ].find({ legislator_chamber_sil:chamber }, { legislator_name_sil: 1 }).exec(function createCB(err, list){
 
 			for(subject in list){
 
@@ -78,7 +78,7 @@ module.exports ={
 
 		    		//console.log(name_legis,"-->",match);
             // process.exit()
-		    		app.models[ "legislators_basic" ].update({legislator_name_sil:match[0]},{
+		    		app.models[ "legislators" ].update({legislator_name_sil:match[0]},{
 		    			legislator_tresdetres_senate:l_3de3,
 		    			legislator_twitter_senate:l_twitter,
 		    			// nombres:legis.nombres,
@@ -103,14 +103,14 @@ module.exports ={
 	klout: function ( camara, req, res, app, regreso ){ //crawl página de tres de tres
 		dipnames={};
 		count=0;
-		app.models[ "legislators_basic" ].find({ legislator_chamber_sil:camara }, { legislator_name_sil: 1, legislator_twitter_senate:1 }).limit(1000).exec(function createCB(err, list){ //nombre_legis_sil
+		app.models[ "legislators" ].find({ legislator_chamber_sil:camara }, { legislator_name_sil: 1, legislator_twitter_senate:1 }).limit(1000).exec(function createCB(err, list){ //nombre_legis_sil
 
 			async.forEachSeries(list, function(legis, callback) {
         console.log("SOY LEGIS",legis.id);
 				if (legis.legislator_twitter_senate && legis.legislator_twitter_senate.length >1) {
 					getKlout(legis.legislator_twitter_senate,function cb(response){
 						console.log("lo hice");
-						app.models[ "legislators_basic" ].update(legis.id,{
+						app.models[ "legislators" ].update(legis.id,{
 			    			kloutscore:response.score
 			    		}).exec(function afterwards(err, updated){
 						  	console.log('Updated',updated,err);
@@ -145,7 +145,7 @@ module.exports ={
 		dipnames={};
 		var listado={}
 
-		app.models[ "legislators_basic" ].find({ legislator_chamber_sil:"senador" }, { legislator_name_sil: 1 }).exec(function createCB(err, list){
+		app.models[ "legislators" ].find({ legislator_chamber_sil:"senador" }, { legislator_name_sil: 1 }).exec(function createCB(err, list){
       console.log("Soy", list);
       	for(subject in list){
 				dip=list[subject];
@@ -184,7 +184,7 @@ module.exports ={
 
 		    	async.forEachSeries(listado, function(legis, callback) {
 		    		//console.log("[][]",legis,listado[legis]);
-		    		app.models[ "legislators_basic" ].update(legis.match[1],{
+		    		app.models[ "legislators" ].update(legis.match[1],{
 		    			idSenado:legis.idsen
 		    		}).exec(function afterwards(err, updated){
 					  	//console.log('Updated',updated,err);

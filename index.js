@@ -80,22 +80,37 @@ var legisladores =require ('./methods/legislatorfind.js');
 var legisladores_profile=require ('./methods/legislatorfindProfile.js');
 var legisladores_party=require ('./methods/legislatorfindParty.js');
 var legisladores_state=require ('./methods/legislatorfindState.js');
+
 var legisladores_ini=require ('./methods/inifindProfile.js');
 var legisladores_pda=require ('./methods/pdafindProfile.js');
 
-//iniciativas
+//iniciativas Index
 var import_ini_ap = require ('./import_json/import_ini_ap.js');
 var import_ini_de = require ('./import_json/import_ini_de.js');
 var import_ini_pe = require ('./import_json/import_ini_pe.js');
 var import_ini_pr = require ('./import_json/import_ini_pr.js');
 var import_ini_re = require ('./import_json/import_ini_re.js');
 
-//iniciativas
+//P. De Acuerdo Index
 var import_pda_ap = require ('./import_json/import_pda_ap.js');
 var import_pda_de = require ('./import_json/import_pda_de.js');
 var import_pda_pe = require ('./import_json/import_pda_pe.js');
 var import_pda_pr = require ('./import_json/import_pda_pr.js');
 var import_pda_re = require ('./import_json/import_pda_re.js');
+
+//iniciativas Index
+var import_ini_ap_index = require ('./import_json/index/import_ini_ap.js');
+var import_ini_de_index = require ('./import_json/index/import_ini_de.js');
+var import_ini_pe_index = require ('./import_json/index/import_ini_pe.js');
+var import_ini_pr_index = require ('./import_json/index/import_ini_pr.js');
+var import_ini_re_index = require ('./import_json/index/import_ini_re.js');
+
+//P. De Acuerdo Index
+var import_pda_ap_index = require ('./import_json/index/import_pda_ap.js');
+var import_pda_de_index = require ('./import_json/index/import_pda_de.js');
+var import_pda_pe_index = require ('./import_json/index/import_pda_pe.js');
+var import_pda_pr_index = require ('./import_json/index/import_pda_pr.js');
+var import_pda_re_index = require ('./import_json/index/import_pda_re.js');
 
 var import_com_res = require ('./import_json/import_com_res.js');
 var import_google_res = require ('./import_json/import_google_res.js');
@@ -108,8 +123,8 @@ var control= require ('./control/index.js');
 var csvv= require ('./csv/import_csv.js');
 
 app.use(function (req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "http://localhost");
-  res.header("Access-Control-Allow-Origin", "http://104.239.248.102");
+  res.header("Access-Control-Allow-Origin", "http://localhost");
+  // res.header("Access-Control-Allow-Origin", "http://104.239.248.102");
   res.header('AccessControlAllowMethods', 'GET,PUT,POST,DELETE');
   res.header("AccessControlAllowHeaders", "XRequestedWith, ContentType");
   next();
@@ -589,6 +604,86 @@ app.get('/init/facebook/index', function(req, res) {
     console.log(count+" legislators update with new Facebook");
   });
 });
+
+app.get('/init/ini_ap/index', function(req, res) {
+     import_ini_ap_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Aprobadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_de/index', function(req, res) {
+     import_ini_de_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Desechadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_pe/index', function(req, res) {
+     import_ini_pe_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Pendientes was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_pr/index', function(req, res) {
+     import_ini_pr_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Presentadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/ini_re/index', function(req, res) {
+     import_ini_re_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for Iniciativas Retiradas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_ap/index', function(req, res) {
+     import_pda_ap_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_de/index', function(req, res) {
+     import_pda_de_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Desechadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_pe/index', function(req, res) {
+     import_pda_pe_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Pendientes was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_pr/index', function(req, res) {
+     import_pda_pr_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Presentadas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/pda_re/index', function(req, res) {
+     import_pda_re_index.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for P. Acuerdo Retiradas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
 
 
 
