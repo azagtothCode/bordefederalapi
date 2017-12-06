@@ -49,7 +49,7 @@ module.exports = module.export =
   post: function post ( req, res, app, cb )
 {
 
-      app.models[ "legislators" ].create(req.body).exec(function createCB(err, created){
+      app.models[ "legislators_basic" ].create(req.body).exec(function createCB(err, created){
           console.log("err:"+err);
           console.log("body",req.body);
           res.end( JSON.stringify( created ) );
@@ -69,7 +69,7 @@ module.exports = module.export =
       if (!req.body) {
           req.body={};
       }
-			//  var www = JSON.stringify(req.body);
+
 			 //
 			//  var res = www.replace("{ legislator_score_sil: '50' }", "{ legislator_score_sil: {$qte:50} }");
 			 //
@@ -77,7 +77,7 @@ module.exports = module.export =
 			//  var myobj = JSON.parse(res);
 			//  console.log(myobj);
 
-  var q = app.models[ "legislators" ].find(req.body).sort( { "legislator_score_sil": -1 }  );//);
+  var q = app.models[ "legislators_basic" ].find(req.body).sort( { "legislator_score_sil": -1 }  );//);
   if ( ! _.isEmpty( req.body.populate ) )
   {
     _.each( req.body.populate, function (p) {

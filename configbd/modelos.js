@@ -81,14 +81,14 @@ module.exports = {
     }
   },
 
-  legislators_leg_ant: {
-       identity: 'legislators_leg_ant',
-       connection: 'baseborde',
-       tableName: "legislators_leg_ant",
-       attributes: {
-         id_legislator_leg_ant:{
-          type: 'string'
-         }
-      }
-  }
+  legislators_basic: {
+     identity: 'legislators_basic',
+     connection: 'baseborde',
+     tableName: "legislators_basic",
+     attributes: {
+       id_legislator_index:{
+        type: 'string'
+       }
+    }
+  },
 }

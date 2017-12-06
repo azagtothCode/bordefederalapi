@@ -26,9 +26,24 @@ var import_json_sg = require ('./import_json/import_json_sg.js');
 var import_json_social = require ('./import_json/import_json_social.js');
 var import_json_legant = require ('./import_json/import_json_legant.js');
 
+var import_json_morena_index = require ('./import_json/index/import_json_morena.js');
+var import_json_mov_index = require ('./import_json/index/import_json_mov.js');
+var import_json_pan_index = require ('./import_json/index/import_json_pan.js');
+var import_json_panal_index = require ('./import_json/index/import_json_panal.js');
+var import_json_prd_index = require ('./import_json/index/import_json_prd.js');
+var import_json_pri_index = require ('./import_json/index/import_json_pri.js');
+var import_json_pt_index = require ('./import_json/index/import_json_pt.js');
+var import_json_pvem_index = require ('./import_json/index/import_json_pvem.js');
+var import_json_sg_index = require ('./import_json/index/import_json_sg.js');
+var import_json_social_index = require ('./import_json/index/import_json_social.js');
+var import_json_legant_index = require ('./import_json/index/import_json_legant.js');
+
 //Importamos s
 var import_score = require ('./import_json/import_score.js');
 var import_facebook = require ('./import_json/import_facebook.js');
+
+var import_score_index = require ('./import_json/index/import_score.js');
+var import_facebook_index = require ('./import_json/index/import_facebook.js');
 
 //Traemos los datos para llenar los tabs de rol, extra, y noticias
 var import_rol = require ('./import_json/import_rol.js');
@@ -37,6 +52,7 @@ var import_news = require ('./import_json/import_news.js');
 
 //Mandamos a llamar toda la info. del SIL y asignamos todas las propiedades a dicha variable
 var info_basica = require ('./scrappers/sil_info_basica');
+var info_basica_index = require ('./scrappers/sil_info_basica_index');
 
 //Mandamos a llamar toda la info. del SIL para trabajo legislativo
 //y asignamos todas las propiedades a dicha variable
@@ -92,8 +108,8 @@ var control= require ('./control/index.js');
 var csvv= require ('./csv/import_csv.js');
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost");
-  // res.header("Access-Control-Allow-Origin", "http://104.239.249.32");
+  // res.header("Access-Control-Allow-Origin", "http://localhost");
+  res.header("Access-Control-Allow-Origin", "http://104.239.248.102");
   res.header('AccessControlAllowMethods', 'GET,PUT,POST,DELETE');
   res.header("AccessControlAllowHeaders", "XRequestedWith, ContentType");
   next();
@@ -464,6 +480,119 @@ app.get('/init/ini_ap', function(req, res) {
 //   });
 // });
 
+app.get('/crawler/sil/basico/index', function(req, res) {
+    info_basica_index.info_basic_get_sil(req, res, app, function(resultado){
+    res.send(JSON.stringify(resultado));
+    console.log(resultado);
+  });
+});
+
+app.get('/init/morena/index', function(req, res) {
+    import_json_morena_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party MORENA was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/mov/index', function(req, res) {
+    import_json_mov_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party MOVIMIENTO CIUDADANO was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/pan/index', function(req, res) {
+    import_json_pan_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PAN was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/panal/index', function(req, res) {
+    import_json_panal_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party NUEVA ALAIANZA was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/prd/index', function(req, res) {
+    import_json_prd_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PRD was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/pri/index', function(req, res) {
+    import_json_pri_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PRI was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+app.get('/init/pt/index', function(req, res) {
+    import_json_pt_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party PARTIDO DEL TRABAJO was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/pvem/index', function(req, res) {
+    import_json_pvem_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party VERDE ECOLOGISTA was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/sg/index', function(req, res) {
+    import_json_sg_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party INDEPENDIENTE / SIN GRUPO was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/social/index', function(req, res) {
+    import_json_social_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for party ENCUENTRO SOCIAL was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/legant/index', function(req, res) {
+    import_json_legant_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for legislature LXII was successfully imported :)");
+    console.log(count+" legislators added");
+  });
+});
+
+app.get('/init/score/index', function(req, res) {
+    import_score_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for BordeScore was successfully imported :)");
+    console.log(count+" legislators update with new Score");
+  });
+});
+
+app.get('/init/facebook/index', function(req, res) {
+    import_facebook_index.import_file (app, function (count){
+    res.send(JSON.stringify({Total_Registers:count}));
+    console.log("The JSON file for BordeScore was successfully imported :)");
+    console.log(count+" legislators update with new Facebook");
+  });
+});
+
+
+
+/*METHODS POST*/
 // EndPoint para recoger los datos basicos de la pagina del SIL
 app.post('/crawler/sil/trabajo', function(req, res) {
   info_trabajo.legislativo_info(req, res, app, function(){
