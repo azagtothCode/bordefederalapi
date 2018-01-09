@@ -25,6 +25,7 @@ var import_json_pvem = require ('./import_json/import_json_pvem.js');
 var import_json_sg = require ('./import_json/import_json_sg.js');
 var import_json_social = require ('./import_json/import_json_social.js');
 var import_json_legant = require ('./import_json/import_json_legant.js');
+var import_json_photos = require ('./import_json/import_photos.js');
 
 var import_json_morena_index = require ('./import_json/index/import_json_morena.js');
 var import_json_mov_index = require ('./import_json/index/import_json_mov.js');
@@ -681,6 +682,14 @@ app.get('/init/ini_ap/index', function(req, res) {
      import_pda_re_index.import_file (app, function (count){
      res.send(JSON.stringify({Total_Registers:count}));
      console.log("The JSON file for P. Acuerdo Retiradas was successfully imported :)");
+     console.log(count+" legislators update with new Dates");
+   });
+ });
+
+ app.get('/init/photos', function(req, res) {
+     import_json_photos.import_file (app, function (count){
+     res.send(JSON.stringify({Total_Registers:count}));
+     console.log("The JSON file for photos was successfully imported :)");
      console.log(count+" legislators update with new Dates");
    });
  });
