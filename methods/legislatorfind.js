@@ -77,7 +77,7 @@ module.exports = module.export =
 			//  var myobj = JSON.parse(res);
 			//  console.log(myobj);
 
-  var q = app.models[ "legislators" ].find(req.body).sort( { "legislator_score_sil": -1 }  );//);
+  var q = app.models[ "legislators_basic" ].find(req.body).sort( { "legislator_score_sil": -1 }  );//);
   if ( ! _.isEmpty( req.body.populate ) )
   {
     _.each( req.body.populate, function (p) {
